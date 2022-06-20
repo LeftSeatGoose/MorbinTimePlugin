@@ -6,8 +6,7 @@ public final class MorbinTimePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        this.getCommand("kit").setExecutor(new CommandKit());
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
     @Override
