@@ -1,0 +1,13 @@
+name: MorbinTimePlugin
+version: '${version}'
+main: org.morbin.morbintimeplugin.MorbinTimePlugin
+api-version: 1.19
+authors: [TipsyAviator]
+description: Server rule enforcer for Minecraft server with friends
+website: https://github.com/TipsyAviator
+
+commands:
+  kit:
+    description: Your description
+    usage: /<command>
+    permission: yourplugin.yourcommandpermission
