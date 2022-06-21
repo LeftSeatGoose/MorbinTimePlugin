@@ -13,16 +13,7 @@ public class AuditPlayerDeath {
                 continue;
             }
 
-            boolean indestructible = false;
-            for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
-                if (stack.getType().equals(element)) {
-                    indestructible = true;
-                    break;
-                }
-            }
-
-            if(!indestructible)
-                stack.setAmount(0);
+            auditStack(stack);
         }
 
         for(int i = 0; i < event.getEntity().getPlayer().getInventory().getExtraContents().length; i++) {
@@ -31,16 +22,7 @@ public class AuditPlayerDeath {
                 continue;
             }
 
-            boolean indestructible = false;
-            for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
-                if (stack.getType().equals(element)) {
-                    indestructible = true;
-                    break;
-                }
-            }
-
-            if(!indestructible)
-                stack.setAmount(0);
+            auditStack(stack);
         }
 
         for(int i = 0; i < event.getEntity().getPlayer().getInventory().getArmorContents().length; i++) {
@@ -49,40 +31,23 @@ public class AuditPlayerDeath {
                 continue;
             }
 
-            boolean indestructible = false;
-            for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
-                if (stack.getType().equals(element)) {
-                    indestructible = true;
-                    break;
-                }
-            }
-
-            if(!indestructible)
-                stack.setAmount(0);
+            auditStack(stack);
         }
 
-        ItemStack main_hand = event.getEntity().getPlayer().getInventory().getItemInMainHand();
-        boolean keep_main_hand = false;
-        for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
+        auditStack(event.getEntity().getPlayer().getInventory().getItemInMainHand());
+        auditStack(event.getEntity().getPlayer().getInventory().getItemInOffHand());
+    }
 
-            if (main_hand.getType().equals(element)) {
-                keep_main_hand = true;
+    public void auditStack(ItemStack stack) {
+        boolean indestructible = false;
+        for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
+            if (stack.getType().equals(element)) {
+                indestructible = true;
                 break;
             }
         }
-        if(!keep_main_hand)
-            main_hand.setAmount(0);
 
-        ItemStack off_hand = event.getEntity().getPlayer().getInventory().getItemInOffHand();
-        boolean keep_off_hand = false;
-        for (Material element : Constants.INDESTRUCTIBLE_ITEMS) {
-
-            if (off_hand.getType().equals(element)) {
-                keep_off_hand = true;
-                break;
-            }
-        }
-        if(!keep_off_hand)
-            off_hand.setAmount(0);
+        if(!indestructible)
+            stack.setAmount(0);
     }
 }
